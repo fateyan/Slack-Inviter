@@ -1,0 +1,18 @@
+{
+    "name": "fateyan/slack-inviter",
+    "description": "Slack Inviter By PHP",
+    "require": {
+        "gregwar/captcha": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "fateyan",
+            "email": "fateyan.tw@gmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+		    "Fateyan\\": "src/"
+		}
+	}
+}
