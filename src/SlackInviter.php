@@ -1,6 +1,7 @@
 <?php
-namespace Fateyan; 
+namespace Fateyan;
 
+class SlackInviter {
     private $captcha;
     private $phrase;
     private $config;
@@ -8,10 +9,9 @@ namespace Fateyan;
     public function __construct($config) {
         //---init---//
         session_start();
-        $this->captcha = new Gregwar\Captcha\CaptchaBuilder;
-        
-        if(empty($config['domain']) {
-            echo 'missing $config['domain'] argument';
+        $this->captcha = new \Gregwar\Captcha\CaptchaBuilder();
+        if(empty($config['domain'])) {
+            echo 'missing $config[\'domain\'] argument';
             return;
         }
 	}
@@ -26,7 +26,7 @@ namespace Fateyan;
     }
 
     public function getPostData() {
-        if(isset($_POST['email']) {
+        if(isset($_POST['email'])) {
       
         }
     }   
