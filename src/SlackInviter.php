@@ -19,8 +19,8 @@ class SlackInviter {
         $title          = $this->config['title'];
         $welcomeMessage = $this->config['welcomMessage'];
         include 'views/header.php';
-        include 'views/header.php';
-        include 'views/header.php';
+        include 'views/content.php';
+        include 'views/footer.php';
         return;
     }
 
