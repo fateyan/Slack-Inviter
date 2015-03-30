@@ -3,46 +3,31 @@
 <head>
     <meta charset="utf-8">
     <style>
+    html,body {
+        height: 100vh;
+        text-align: center;
+        padding: 0px;
+        margin: 0px;
+    }
     .joinus {
-        position: absolute;
-        top: 30%;
+        margin-top: 10%;
         background-color: #fff;
-        box-shadow: 0px 0px 20px #333;   
+        box-shadow: 0px 0px 20px #333;
         padding: 20px;
-        width: 40%;
+        padding-top: 0px;
+        width: 18rem;
         min-width: 100px;
-    } 
+        height: 13rem;
+        display: inline-block;
+    }
+    .form-input {
+        border-radius: 4px 4px;
+        height: 30px;
+        border: solid #ddd 1px;
+        width: 200px;
+    }
     </style>
     <title></title>
 </head>
 <body>
-    <form method="post" action="index.php?method=getPostData">
-    <div class="joinus">
-        <h1 class="title"><?php echo $welcomeMessage;?></h1>
-        <table>
-            <tr>
-                <td>
-                    <label for="email">Email</label>
-                <td>
-                    <td><input type="text" name="email" class="form-input">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="firstname">firstname</label>
-                <td>
-                    <td><input type="text" name="firstname" class="form-input">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="lastname">lastname</label>
-                <td>
-                    <td><input type="text" name="lastname" class="form-input">
-                </td>
-            </tr>
-        </table>   
-         
-    </div>
-</body>
-</html>
+

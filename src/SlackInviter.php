@@ -8,16 +8,14 @@ class SlackInviter {
 
     public function __construct($config) {
         //---init---//
+        $this->_checkConfig($config);
+        $this->config = $config;
         $this->captcha = new \Gregwar\Captcha\CaptchaBuilder();
-        if(empty($config['domain'])) {
-            echo 'missing $config[\'domain\'] argument';
-            return;
-        }
-	}
+    }
 
     public function index() {
-        $title          = $this->config['title'];
-        $welcomeMessage = $this->config['welcomMessage'];
+        $data['title']          = $this->config['title'];
+        $data['welcomeMessage'] = $this->config['welcomeMessage'];
         include 'views/header.php';
         include 'views/content.php';
         include 'views/footer.php';
@@ -28,7 +26,7 @@ class SlackInviter {
         if(isset($_POST['email'])) {
       
         }
-    }   
+    }
 
     private function _setCaptcha() {
         $_SESSION['phrase'] = $this->captcha->build();
@@ -40,12 +38,33 @@ class SlackInviter {
             return;
         if( $post === $_SESSION['phrase'] ) {
             return TRUE;
-		}
+        }
         return FALSE;
     }
 
     private function _getCaptcha() {
         return $this->captcha->inline();
+    }
+
+    private function _checkConfig($cfg) {
+        if( !is_array($cfg) ) {
+            die('missing configuration');
+        }
+        $message = array();
+        $message[] = empty($cfg['token']) ? "mssing config['token']" : '';
+        $message[] = empty($cfg['domain']) ? "mssing config['domain']" : '';
+        $message[] = empty($cfg['channels']) ? "mssing config['channel']" : '';
+        $message[] = empty($cfg['title']) ? "mssing config['title']" : '';
+        $message[] = empty($cfg['welcomeMessage']) ? "mssing config['welcomeMessage']" : '';
+        $message = array_filter($message);
+        if(empty($message)) {
+            return;
+        }
+
+        foreach( $message as $var) {
+            echo $var . "<br>";
+        }
+        die();
     }
      
     private function _slackInvite($email, $firstName = '', $lastName = '') {
