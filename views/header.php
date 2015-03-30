@@ -17,7 +17,7 @@
         padding-top: 0px;
         width: 18rem;
         min-width: 100px;
-        height: 13rem;
+        height: 18rem;
         display: inline-block;
     }
     .form-input {

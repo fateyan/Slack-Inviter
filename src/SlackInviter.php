@@ -1,51 +1,105 @@
 <?php
 namespace Fateyan;
 
+/**
+ * Slack invite their own
+ * @author fateyan <fateyan.tw@gmail.com>
+ */
+
 class SlackInviter {
-    private $captcha;
-    private $phrase;
-    private $config;
+
+    /**
+     * Composer dependency, \Gregwar\Captcha\CaptchaBuilder
+     * @var object
+     */
+    private $_captcha;
+
+    /**
+     * Storing configuration of /config.inc.php
+     * @var array
+     */
+    private $_config;
 
     public function __construct($config) {
         //---init---//
         $this->_checkConfig($config);
-        $this->config = $config;
-        $this->captcha = new \Gregwar\Captcha\CaptchaBuilder();
+        $this->_config = $config;
+        $this->_captcha = new \Gregwar\Captcha\CaptchaBuilder();
     }
 
+    /**
+     * Homepage
+     * @var
+     */
     public function index() {
-        $data['title']          = $this->config['title'];
-        $data['welcomeMessage'] = $this->config['welcomeMessage'];
+        $this->_setCaptcha();
+        $data['captcha']        = $this->_getCaptcha();
+        $data['title']          = $this->_config['title'];
+        $data['welcomeMessage'] = $this->_config['welcomeMessage'];
         include 'views/header.php';
         include 'views/content.php';
         include 'views/footer.php';
         return;
     }
-
-    public function getPostData() {
-        if(isset($_POST['email'])) {
-      
+    /**
+     * A page for get postData
+     * post(email, firstname, lastname, captcha)
+     */
+    public function postData() {
+        $data = array();
+        if( isset($_POST['captcha']) ) {
+            if( !$this->_checkCaptcha($_POST['captcha']) )
+                die('wrong captcha');
         }
+        if( isset($_POST['firstname']) )
+            $data['firstname'] = $_POST['firstname'];
+
+        if( isset($_POST['lastname']) )    
+            $data['lastname'] = $_POST['lastname'];
+
+        if( empty($_POST['email']) ) {
+            die('<a href="index.php">missing email</a>');
+        }
+        $data['email'] = $_POST['email'];
+
+        //$this->_slackInvite($data);
     }
 
+    /**
+     * set captcha
+     */
     private function _setCaptcha() {
-        $_SESSION['phrase'] = $this->captcha->build();
-        return $phrase;
+        $this->_captcha->build();
+        $_SESSION['phrase'] = $this->_captcha->getPhrase();
+        return;
     }
 
-    private function checkCaptcha($post) {
-        if( empty($_SESSION['phrase'] ) )
-            return;
-        if( $post === $_SESSION['phrase'] ) {
+    /**
+     * Checking whether post-captcha is right
+     * @param string captcha
+     * @return bool
+     */
+    private function _checkCaptcha($post) {
+        $phrase = $_SESSION['phrase'];
+        $this->_captcha->build();
+        if( empty( $phrase ) )
+            return FALSE;
+        if( $post === $phrase ) {
             return TRUE;
         }
         return FALSE;
     }
 
+    /**
+     * @return string image of captcha
+     */
     private function _getCaptcha() {
-        return $this->captcha->inline();
+        return $this->_captcha->inline();
     }
 
+    /**
+     * @param array configuration of /config.inc.php
+     */
     private function _checkConfig($cfg) {
         if( !is_array($cfg) ) {
             die('missing configuration');
@@ -66,21 +120,23 @@ class SlackInviter {
         }
         die();
     }
-     
-    private function _slackInvite($email, $firstName = '', $lastName = '') {
+    /**
+     * @param array postdata(email, [firstname], [lastname])
+     */ 
+    private function _slackInvite($data) {
         $postdata = array();
-        $url = $this->config['domain'] . 'slack.com/api/users.admin.invite?t=' . time();
-        $postdata['channels'] = implode(",", $this->config['channels']);
+        $url = $this->_config['domain'] . 'slack.com/api/users.admin.invite?t=' . time();
+        $postdata['channels'] = implode(",", $this->_config['channels']);
         $postdata['set_active'] = 1;
-        $postdata['token'] = $this->config['token'];
-        $postdata['email'] = $email;
+        $postdata['token'] = $this->_config['token'];
+        $postdata['email'] = $data['email'];
         
-        if( !empty($firstname) ) {
-            $postdata['firstname'] = $firstname;
+        if( !empty($data['firstname']) ) {
+            $postdata['firstname'] = $data['firstname'];
         }
 
-        if( !empty($lastname) ) {
-            $postdata['lastname'] = $lastname;
+        if( !empty($data['lastname']) ) {
+            $postdata['lastname'] = $data['lastname'];
         }
 
         $temp = '';

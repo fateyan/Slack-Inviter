@@ -1,5 +1,5 @@
 <body>
-    <form method="post" action="index.php?method=getPostData">
+    <form method="post" action="index.php?method=postData">
     <div class="joinus">
         <h1 class="title"><?php echo $data['welcomeMessage'];?></h1>
         <table>
@@ -7,7 +7,7 @@
                 <td>
                     <label for="email">Email</label>
                 <td>
-                    <td><input type="text" name="email" class="form-input">
+                    <td><input type="text" name="email" class="form-input" required>
                 </td>
             </tr>
             <tr>
@@ -22,6 +22,18 @@
                     <label for="lastname">Lastname</label>
                 <td>
                     <td><input type="text" name="lastname" class="form-input">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lastname">Captcha</label>
+                <td>
+                    <td><input type="text" name="captcha" class="form-input" required>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <img src="<?php echo $data['captcha'];?>">
                 </td>
             </tr>
             <tr>
