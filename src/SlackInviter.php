@@ -20,6 +20,7 @@ class SlackInviter {
      */
     private $_config;
 
+
     public function __construct($config) {
         //---init---//
         $this->_checkConfig($config);
@@ -41,6 +42,7 @@ class SlackInviter {
         include 'views/footer.php';
         return;
     }
+
     /**
      * A page for get postData
      * post(email, firstname, lastname, captcha)
@@ -62,7 +64,7 @@ class SlackInviter {
         }
         $data['email'] = $_POST['email'];
 
-        //$this->_slackInvite($data);
+        $this->_slackInvite($data);
     }
 
     /**
@@ -120,12 +122,13 @@ class SlackInviter {
         }
         die();
     }
+
     /**
      * @param array postdata(email, [firstname], [lastname])
      */ 
     private function _slackInvite($data) {
         $postdata = array();
-        $url = $this->_config['domain'] . 'slack.com/api/users.admin.invite?t=' . time();
+        $url = 'https://' . $this->_config['domain'] . '.slack.com/api/users.admin.invite?t=' . time();
         $postdata['channels'] = implode(",", $this->_config['channels']);
         $postdata['set_active'] = 1;
         $postdata['token'] = $this->_config['token'];
@@ -145,13 +148,18 @@ class SlackInviter {
         }
         $postdata = substr($temp, 0, -1);//$temp "key=value&key=value&"
 
-
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
-        //curl_exec($curl);
-        
-        return $curl;
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,   // return web page
+            CURLOPT_URL => $url,
+            CURLOPT_POST => TRUE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_POSTFIELDS => $postdata
+        );
+        curl_setopt_array($curl, $options);
+
+        $response = curl_exec($curl);
+
+        return $response;
     }
 }
