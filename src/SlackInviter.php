@@ -8,7 +8,6 @@ class SlackInviter {
 
     public function __construct($config) {
         //---init---//
-        session_start();
         $this->captcha = new \Gregwar\Captcha\CaptchaBuilder();
         if(empty($config['domain'])) {
             echo 'missing $config[\'domain\'] argument';
