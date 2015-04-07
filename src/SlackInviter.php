@@ -62,7 +62,7 @@ class SlackInviter {
         if( empty($_POST['email']) ) {
             die('<a href="index.php">missing email</a>');
         }
-        $data['email'] = $_POST['email'];
+        $data['email'] = trim($_POST['email']);
 
         $this->_slackInvite($data);
     }
