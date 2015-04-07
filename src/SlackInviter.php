@@ -142,11 +142,7 @@ class SlackInviter {
             $postdata['lastname'] = $data['lastname'];
         }
 
-        $temp = '';
-        foreach( $postdata as $key => $value ) {
-            $temp .= $key . "=" . $value . "&";
-        }
-        $postdata = substr($temp, 0, -1);//$temp "key=value&key=value&"
+        $postdata = http_build_query($postdata);
 
         $curl = curl_init();
         $options = array(
