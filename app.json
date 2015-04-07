@@ -1,0 +1,25 @@
+{
+  "name": "slack-inviter",
+  "description": "Slack Inviter By PHP",
+  "repository": "https://github.com/fateyan/slack-inviter",
+  "env": {
+    "SLACK_TOKEN": {
+      "description": "slack token, it can be found on https://api.slack.com/web",
+      "required": true
+    },
+    "SLACK_DOMAIN": {
+      "required": true
+    },
+    "SLACK_CHANNELS": {
+      "description": "divide by comma[,], it can be found on https://api.slack.com/methods/channel.list/test",
+      "required": true
+    },
+    "SLACK_WELCOME_MESSAGE": {
+      "value": "Hi ! Join our Slack"
+    },
+    "SLACK_TITLE": {
+      "description": "title of html",
+      "value": "Join our slack"
+    },
+  }
+}

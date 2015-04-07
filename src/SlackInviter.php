@@ -129,7 +129,7 @@ class SlackInviter {
     private function _slackInvite($data) {
         $postdata = array();
         $url = 'https://' . $this->_config['domain'] . '.slack.com/api/users.admin.invite?t=' . time();
-        $postdata['channels'] = implode(",", $this->_config['channels']);
+        $postdata['channels'] = $this->_config['channels'];
         $postdata['set_active'] = 1;
         $postdata['token'] = $this->_config['token'];
         $postdata['email'] = $data['email'];
