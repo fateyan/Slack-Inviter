@@ -37,9 +37,9 @@ class SlackInviter {
         $data['captcha']        = $this->_getCaptcha();
         $data['title']          = $this->_config['title'];
         $data['welcomeMessage'] = $this->_config['welcomeMessage'];
-        include 'views/header.php';
-        include 'views/content.php';
-        include 'views/footer.php';
+        include BASE_PATH . '/views/header.php';
+        include BASE_PATH . '/views/content.php';
+        include BASE_PATH . '/views/footer.php';
         return;
     }
 
