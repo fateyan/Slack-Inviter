@@ -10,13 +10,13 @@ $config['token']  = $_SERVER['SLACK_TOKEN'];
 
 $config['domain'] = $_SERVER['SLACK_DOMAIN'];
 //---put your channel id there (divide by comma[,]), it can be found on https://api.slack.com/methods/channel.list/test ---//
-$config['channels'] = trim($_SERVER['SLACK_CHANNELS')];
+$config['channels'] = trim($_SERVER['SLACK_CHANNELS']);
 //---The welcome message on div---//
 $config['welcomeMessage'] = $_SERVER['SLACK_WELCOME_MESSAGE'];
 //---html title---//
 $config['title'] = $_SERVER['SLACK_TITLE'];
 
-define('BASE_PATH', __DIR__);
+define('BASE_PATH', realpath('../') . '/');
 
 $method = empty($_GET['method']) ? 'index' : $_GET['method'];
 $object = new \Fateyan\SlackInviter($config);
