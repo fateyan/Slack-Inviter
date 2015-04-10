@@ -1,7 +1,8 @@
 <body>
     <form method="post" action="index.php?method=postData">
     <div class="joinus">
-        <h1 class="title"><?php echo $data['welcomeMessage'];?></h1>
+        <h1 class="title"><?php echo $data['header'];?></h1>
+        <h4 class="sub-title"><?php echo $data['subheader'];?></h4>
         <table>
             <tr>
                 <td>
@@ -38,7 +39,7 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <input type="submit">
+                    <input type="submit" class="submit">
                 </td>
             </tr>
         </table>   

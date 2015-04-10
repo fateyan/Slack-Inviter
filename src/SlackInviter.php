@@ -36,7 +36,8 @@ class SlackInviter {
         $this->_setCaptcha();
         $data['captcha']        = $this->_getCaptcha();
         $data['title']          = $this->_config['title'];
-        $data['welcomeMessage'] = $this->_config['welcomeMessage'];
+        $data['header'] = $this->_config['header'];
+        $data['subheader'] = $this->_config['subheader'];
         include BASE_PATH . 'views/header.php';
         include BASE_PATH . 'views/content.php';
         include BASE_PATH . 'views/footer.php';
@@ -64,7 +65,13 @@ class SlackInviter {
         }
         $data['email'] = trim($_POST['email']);
 
-        $this->_slackInvite($data);
+        $message = json_decode($this->_slackInvite($data), TRUE);
+        if($message['ok'] === 'true') {
+            echo 'completed !';
+        } else {
+            echo 'error ! if your first sending is correct, second sending will get failure';
+        }
+        include BASE_PATH . 'views/footer.php';
     }
 
     /**
@@ -107,11 +114,12 @@ class SlackInviter {
             die('missing configuration');
         }
         $message = array();
-        $message[] = empty($cfg['token']) ? "mssing config['token']" : '';
-        $message[] = empty($cfg['domain']) ? "mssing config['domain']" : '';
-        $message[] = empty($cfg['channels']) ? "mssing config['channel']" : '';
-        $message[] = empty($cfg['title']) ? "mssing config['title']" : '';
-        $message[] = empty($cfg['welcomeMessage']) ? "mssing config['welcomeMessage']" : '';
+        $message[] = empty($cfg['token']) ? "missing config['token']" : '';
+        $message[] = empty($cfg['domain']) ? "missing config['domain']" : '';
+        $message[] = empty($cfg['channels']) ? "missing config['channel']" : '';
+        $message[] = empty($cfg['title']) ? "missing config['title']" : '';
+        $message[] = empty($cfg['header']) ? "missing config['header']" : '';
+        $message[] = empty($cfg['subheader']) ? "missing config['subheader']" : '';
         $message = array_filter($message);
         if(empty($message)) {
             return;
@@ -157,5 +165,6 @@ class SlackInviter {
         $response = curl_exec($curl);
 
         return $response;
+
     }
 }
