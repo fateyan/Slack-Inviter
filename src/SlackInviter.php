@@ -71,7 +71,6 @@ class SlackInviter {
         } else {
             echo 'error ! if your first sending is correct, second sending will get failure';
         }
-        include BASE_PATH . 'views/footer.php';
     }
 
     /**
