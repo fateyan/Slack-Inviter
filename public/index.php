@@ -15,7 +15,7 @@ $config['channels'] = trim($_SERVER['SLACK_CHANNELS']);
 $config['header'] = $_SERVER['SLACK_HEADER'];
 $config['subheader'] = $_SERVER['SLACK_SUB_HEADER'];
 //---html title---//
-$config['title'] = 'Join our Slack !';
+$config['title'] = $_SERVER['SLACK_TITLE'];
 
 define('BASE_PATH', realpath('../') . '/');
 
