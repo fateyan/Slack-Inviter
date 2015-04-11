@@ -1,14 +1,14 @@
 # Slack-Inviter
-Slack Inviter By PHP
+A Slack Inviter Written By PHP
 
-## You can deploy it on heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://www.heroku.com/deploy/?template=https://github.com/fateyan/slack-inviter)
-## Or You can set it up by yourself
-1. Clone it :`git clone https://github.com/fateyan/slack-inviter.git`  
-(remove /.git directory when you are in production environment) 
-2. `composer install`
-3. Set Environment Variable  
-nginx:  
+# Building
+## Deploy on Heroku
+[![Deploy Button](https://www.herokucdn.com/deploy/button.png)](https://www.heroku.com/deploy/?template=https://github.com/fateyan/slack-inviter)
+## Or You Can Set Up It by Yourself
+1. Just Clone this Repo: `git clone ssh://git@github.com/fateyan/slack-inviter.git`  
+2. Then run `composer install`
+3. Set Up Environment Variables  
+For Nginx:
 ```nginx
 fastcgi_param SLACK_TOKEN yourtoken;  
 fastcgi_param SLACK_DOMAIN yourdomain;  
@@ -16,11 +16,11 @@ fastcgi_param SLACK_CHANNELS channel1,channel2,channel3;
 fastcgi_param SLACK_HEADER "Join&nbsp;our&nbsp;Slack";  
 fastcgi_param SLACK_SUB_HEADER "Welcome";
 ```
-apache:
+For Apache:
 ```
 SetEnv VariableName VariableValue
 ```
-...etc  
-4. Run your server  
+4. There You Go~
   
 Good Luck `>_>~`
+
