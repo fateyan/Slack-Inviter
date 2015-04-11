@@ -12,8 +12,8 @@ $config['domain'] = $_SERVER['SLACK_DOMAIN'];
 //---put your channel id there (divide by comma[,]), it can be found on https://api.slack.com/methods/channel.list/test ---//
 $config['channels'] = trim($_SERVER['SLACK_CHANNELS']);
 //---The welcome message on div---//
-$config['header'] = 'Join our Slack !';
-$config['subheader'] = 'Welcome';
+$config['header'] = $_SERVER['SLACK_HEADER'];
+$config['subheader'] = $_SERVER['SLACK_SUB_HEADER'];
 //---html title---//
 $config['title'] = 'Join our Slack !';
 
