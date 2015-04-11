@@ -11,7 +11,6 @@
         font-family: 'consolas';
     }
     body {
-        background-image: url('asserts/img/bkg.jpg');
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -59,7 +58,15 @@
     .submit-td {
         text-align: center !important;
     } 
+    canvas { 
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: -999;
+    }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.0/trianglify.min.js"></script>
+   
     <title><?php echo $data['title'];?></title>
 </head>
 <body>

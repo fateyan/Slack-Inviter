@@ -1,3 +1,11 @@
+<script>
+        var pattern = Trianglify({
+          width: window.innerWidth, 
+          height: window.innerHeight
+        });
+        document.body.appendChild(pattern.canvas())
+    
+    </script>
 <form method="post" action="index.php?method=postData">
     <div class="joinus">
         <h1 class="title"><?php echo $data['header'];?></h1>
