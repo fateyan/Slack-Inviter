@@ -14,12 +14,15 @@
       "description": "divide by comma[,], it can be found on https://api.slack.com/methods/channel.list/test",
       "required": true
     },
-    "SLACK_WELCOME_MESSAGE": {
+    "SLACK_HEADER": {
       "value": "Hi ! Join our Slack"
+    },
+    "SLACK_SUB_HEADER": {
+      "value": "welcome"
     },
     "SLACK_TITLE": {
       "description": "title of html",
       "value": "Join our slack"
-    },
+    }
   }
 }
