@@ -46,10 +46,19 @@
         color: #fff;
         border: none;
         border-radius: 3px 3px 3px 3px;
-        width: 60px;
         height: 30px;
+        padding: 5px 10px;
         font-family: 'Microsoft Jhenghei';
     }
+    td:nth-child(even) {
+        text-align: left;
+    } 
+    td:nth-child(odd) {
+        text-align: right;
+    }    
+    .submit-td {
+        text-align: center !important;
+    } 
     </style>
     <title><?php echo $data['title'];?></title>
 </head>
