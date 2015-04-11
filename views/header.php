@@ -2,13 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title><?php echo $data['title'];?></title>
+
     <style>
-    html,body {
+    html, body {
         height: 100vh;
         text-align: center;
         padding: 0px;
         margin: 0px;
-        font-family: 'consolas';
+        font-family: 'Oxygen', sans-serif;
     }
     body {
         background-repeat: no-repeat;
@@ -47,14 +49,13 @@
         border-radius: 3px 3px 3px 3px;
         height: 30px;
         padding: 5px 10px;
-        font-family: 'Microsoft Jhenghei';
     }
     td:nth-child(even) {
         text-align: left;
     } 
     td:nth-child(odd) {
         text-align: right;
-    }    
+    }
     .submit-td {
         text-align: center !important;
     } 
@@ -65,9 +66,7 @@
         z-index: -999;
     }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.0/trianglify.min.js"></script>
-   
-    <title><?php echo $data['title'];?></title>
+    <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">
 </head>
 <body>
 
