@@ -52,7 +52,7 @@ class SlackInviter {
         $data = array();
         if( isset($_POST['captcha']) ) {
             if( !$this->_checkCaptcha($_POST['captcha']) )
-                die('wrong captcha');
+                die('<center><h1>wrong captcha</h1></center>');
         }
         if( isset($_POST['firstname']) )
             $data['firstname'] = $_POST['firstname'];
@@ -66,10 +66,10 @@ class SlackInviter {
         $data['email'] = trim($_POST['email']);
 
         $message = json_decode($this->_slackInvite($data), TRUE);
-        if($message['ok'] === 'true') {
-            echo 'completed !';
+        if($message['ok']) {
+            echo '<center><h1>Completed !</h1></center> ';
         } else {
-            echo 'error ! if your first sending is correct, second sending will get failure';
+            echo '<center><h1>Error</h1><p>If you have ever submitted it, you should check your mail.</p></center>';
         }
     }
 
