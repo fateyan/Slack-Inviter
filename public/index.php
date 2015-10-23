@@ -4,8 +4,6 @@ require '../vendor/autoload.php';
 /**
  * Config
  */
-$dotenv = new Dotenv\Dotenv(realpath('../'));
-$dotenv->load();
 $config = [];
 //It can be found at https://api.slack.com/web
 $config['token']                = $_SERVER['SLACK_TOKEN'];
