@@ -15,6 +15,8 @@ fastcgi_param SLACK_DOMAIN yourdomain;
 fastcgi_param SLACK_CHANNELS channel1,channel2,channel3;  
 fastcgi_param SLACK_HEADER "Join&nbsp;our&nbsp;Slack";  
 fastcgi_param SLACK_SUB_HEADER "Welcome";
+fastcgi_param SLACK_INVITE_SUCCEED "Congratulations";
+fastcgi_param SLACK_INVITE_FAIL "Error";
 ```
 For Apache:
 ```
@@ -23,4 +25,3 @@ SetEnv VariableName VariableValue
 4. There You Go~
   
 Good Luck `>_>~`
-
