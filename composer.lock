@@ -1,24 +1,24 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "98ec8f4882ec975ceeb1e67c11d3b5ee",
+    "hash": "52855ca80e1f23abd9a6e3fc2bd4da8d",
+    "content-hash": "c3c011dd0fc1de4c6f820d3ad1d39951",
     "packages": [
         {
             "name": "gregwar/captcha",
             "version": "dev-master",
-            "target-dir": "Gregwar/Captcha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/Captcha.git",
-                "reference": "c5357cb6f6d2c09f70ed1712382d44af6eae0865"
+                "reference": "1240ab993ca713680573b2d4166900da5f758623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/c5357cb6f6d2c09f70ed1712382d44af6eae0865",
-                "reference": "c5357cb6f6d2c09f70ed1712382d44af6eae0865",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/1240ab993ca713680573b2d4166900da5f758623",
+                "reference": "1240ab993ca713680573b2d4166900da5f758623",
                 "shasum": ""
             },
             "require": {
@@ -27,8 +27,8 @@
             },
             "type": "captcha",
             "autoload": {
-                "psr-0": {
-                    "Gregwar\\Captcha": ""
+                "psr-4": {
+                    "Gregwar\\Captcha\\": "/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -53,7 +53,7 @@
                 "captcha",
                 "spam"
             ],
-            "time": "2015-01-03 12:41:56"
+            "time": "2015-09-11 15:23:20"
         }
     ],
     "packages-dev": [],

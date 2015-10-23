@@ -31,7 +31,7 @@
         border-radius: 4px 4px;
         height: 30px;
         border: solid #ddd 1px;
-        width: 200px;
+        width: 180px;
     }
     .title {
         color: #111;
@@ -64,6 +64,9 @@
         left: 0;
         position: absolute;
         z-index: -999;
+    }
+    .alert {
+        color: red;
     }
     </style>
     <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">

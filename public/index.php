@@ -4,27 +4,29 @@ require '../vendor/autoload.php';
 /**
  * Config
  */
-$config = array();
-//---put your token there, it can be found on https://api.slack.com/web ---//
-$config['token']  = $_SERVER['SLACK_TOKEN'];
-
-$config['domain'] = $_SERVER['SLACK_DOMAIN'];
-//---put your channel id there (divide by comma[,]), it can be found on https://api.slack.com/methods/channel.list/test ---//
-$config['channels'] = trim($_SERVER['SLACK_CHANNELS']);
-//---The welcome message on div---//
-$config['header'] = $_SERVER['SLACK_HEADER'];
-$config['subheader'] = $_SERVER['SLACK_SUB_HEADER'];
-//---html title---//
-$config['title'] = $_SERVER['SLACK_TITLE'];
+$dotenv = new Dotenv\Dotenv(realpath('../'));
+$dotenv->load();
+$config = [];
+//It can be found at https://api.slack.com/web
+$config['token']                = $_SERVER['SLACK_TOKEN'];
+$config['domain']               = $_SERVER['SLACK_DOMAIN'];
+$config['channels']             = (empty($_SERVER['SLACK_CHANNELS'])) ? null : trim($_SERVER['SLACK_CHANNELS']);
+//Messages on page
+$config['message']['header']    = $_SERVER['SLACK_HEADER'];
+$config['message']['subheader'] = $_SERVER['SLACK_SUB_HEADER'];
+$config['message']['succeed']   = (empty($_SERVER['SLACK_INVITE_SUCCEED'])) ? 'Invitation is sended to your email, check it plz.' : $_SERVER['SLACK_INVITE_SUCCEED'];
+$config['message']['fail']      = (empty($_SERVER['SLACK_INVITE_FAIL'])) ? 'Oops! It has some problems.' : $_SERVER['SLACK_INVITE_FAIL'];
+//html title
+$config['title']                = $_SERVER['SLACK_TITLE'];
 
 define('BASE_PATH', realpath('../') . '/');
 
-$method = empty($_GET['method']) ? 'index' : $_GET['method'];
-$object = new \Fateyan\SlackInviter($config);
+$route = empty($_GET['route']) ? 'index' : $_GET['route'];
+$inviter = new \Slack\Inviter($config);
 
-if( method_exists($object, $method) ) {
-    $object->$method();
+$whiteList = ['index', 'send'];
+if( in_array($route, $whiteList) ) {
+    $inviter->$route();
 } else {
-    $object->index();
+    $inviter->index();
 }
-

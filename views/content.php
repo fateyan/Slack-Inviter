@@ -1,4 +1,4 @@
-<form method="post" action="index.php?method=postData">
+<form method="post" action="index.php?route=<?php echo $data['postTo'];?>">
     <div class="joinus">
         <h1 class="title"><?php echo $data['header'];?></h1>
         <h4 class="sub-title"><?php echo $data['subheader'];?></h4>
@@ -8,7 +8,7 @@
                     <label for="email">Email:</label>
                 </td>
                 <td>
-                    <input type="text" name="email" class="form-input" required>
+                    <input type="text" name="email" class="form-input" required><span class="alert">*</span>
                 </td>
             </tr>
             <tr>
@@ -32,7 +32,7 @@
                     <label for="lastname">Captcha:</label>
                 </td>
                 <td>
-                    <input type="text" name="captcha" class="form-input" required>
+                    <input type="text" name="captcha" class="form-input" required><span class="alert">*</span>
                 </td>
             </tr>
             <tr>

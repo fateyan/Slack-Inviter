@@ -1,12 +1,12 @@
 <?php
-namespace Fateyan;
+namespace Slack;
 
 /**
- * Slack invite their own
+ * Inviting their own to Slack
  * @author fateyan <fateyan.tw@gmail.com>
  */
 
-class SlackInviter {
+class Inviter {
 
     /**
      * Composer dependency, \Gregwar\Captcha\CaptchaBuilder
@@ -15,14 +15,12 @@ class SlackInviter {
     private $_captcha;
 
     /**
-     * Storing configuration of /config.inc.php
+     * Coniguration in public/index.php
      * @var array
      */
     private $_config;
 
-
     public function __construct($config) {
-        //---init---//
         $this->_checkConfig($config);
         $this->_config = $config;
         $this->_captcha = new \Gregwar\Captcha\CaptchaBuilder();
@@ -34,10 +32,12 @@ class SlackInviter {
      */
     public function index() {
         $this->_setCaptcha();
-        $data['captcha']        = $this->_getCaptcha();
-        $data['title']          = $this->_config['title'];
-        $data['header'] = $this->_config['header'];
-        $data['subheader'] = $this->_config['subheader'];
+        $data['captcha']   = $this->_getCaptcha();
+        $data['title']     = $this->_config['title'];
+        $data['header']    = $this->_config['message']['header'];
+        $data['subheader'] = $this->_config['message']['subheader'];
+        $data['postTo']    = 'send';
+
         include BASE_PATH . 'views/header.php';
         include BASE_PATH . 'views/content.php';
         include BASE_PATH . 'views/footer.php';
@@ -45,32 +45,48 @@ class SlackInviter {
     }
 
     /**
-     * A page for get postData
-     * post(email, firstname, lastname, captcha)
+     * A page for send invitation request to Slack
+     * @uses $_POST(email, firstname, lastname, captcha)
      */
-    public function postData() {
-        $data = array();
-        if( isset($_POST['captcha']) ) {
-            if( !$this->_checkCaptcha($_POST['captcha']) )
-                die('<center><h1>wrong captcha</h1></center>');
+    public function send() {
+        $data = [];
+        $errors = [];
+        $message = $this->_config['message'];
+
+        if( isset($_POST['captcha']) )
+            if( !$this->_checkCaptcha($_POST['captcha']) ) {
+                $errors[] = 'Your captcha is wrong.';
+                include BASE_PATH . 'views/error.php';
+                return;
+            }
+        if( empty($_POST['email']) ) {
+            $errors[] = 'Your email is empty.';
+            include BASE_PATH . 'views/error.php';
+            return;
         }
+
+        $data['email'] = $_POST['email'];
+
         if( isset($_POST['firstname']) )
             $data['firstname'] = $_POST['firstname'];
-
         if( isset($_POST['lastname']) )    
             $data['lastname'] = $_POST['lastname'];
 
-        if( empty($_POST['email']) ) {
-            die('<a href="index.php">missing email</a>');
-        }
-        $data['email'] = trim($_POST['email']);
+        $response = json_decode($this->_slackInvite($data), TRUE);
 
-        $message = json_decode($this->_slackInvite($data), TRUE);
-        if($message['ok']) {
-            echo '<center><h1>Completed !</h1></center> ';
-        } else {
-            echo '<center><h1>Error</h1><p>If you have ever submitted it, you should check your mail.</p></center>';
+        if(isset($response['ok']) && $response['ok'] === TRUE) {
+            include BASE_PATH . 'views/succeed.php';
+            return;
+        } 
+
+        if(isset($response['error'])) {
+            if($response['error'] === 'invalid_email')
+                $errors[] = "Your email is invalid.";
+            if($response['error'] === 'already_invited')
+                $errors[] = "You has already been invited.";
         }
+        include BASE_PATH . 'views/error.php';
+        return;
     }
 
     /**
@@ -112,31 +128,33 @@ class SlackInviter {
         if( !is_array($cfg) ) {
             die('missing configuration');
         }
-        $message = array();
-        $message[] = empty($cfg['token']) ? "missing config['token']" : '';
-        $message[] = empty($cfg['domain']) ? "missing config['domain']" : '';
-        $message[] = empty($cfg['channels']) ? "missing config['channel']" : '';
-        $message[] = empty($cfg['title']) ? "missing config['title']" : '';
-        $message[] = empty($cfg['header']) ? "missing config['header']" : '';
-        $message[] = empty($cfg['subheader']) ? "missing config['subheader']" : '';
-        $message = array_filter($message);
-        if(empty($message)) {
+        $errors = [];
+        $errors[] = empty($cfg['token']) ? "This application missing config['token']." : '';
+        $errors[] = empty($cfg['domain']) ? "This application missing config['domain']." : '';
+        $errors[] = empty($cfg['title']) ? "This application missing config['title']." : '';
+        $errors[] = empty($cfg['message']['header']) ? "This application missing config['header']." : '';
+        $errors[] = empty($cfg['message']['subheader']) ? "This application missing config['subheader']." : '';
+        $errors[] = empty($cfg['message']['succeed']) ? "This application missing config['succeed']." : '';
+        $errors[] = empty($cfg['message']['fail']) ? "This application missing config['fail']." : '';
+        $errors = array_filter($errors);
+        if(!empty($errors)) {
+            $message['fail'] = 'Missing configuration.';
+            include BASE_PATH . "views/error.php";
+            die();
             return;
         }
 
-        foreach( $message as $var) {
-            echo $var . "<br>";
-        }
-        die();
+        return;
     }
 
     /**
      * @param array postdata(email, [firstname], [lastname])
      */ 
     private function _slackInvite($data) {
-        $postdata = array();
+        $postdata = [];
         $url = 'https://' . $this->_config['domain'] . '.slack.com/api/users.admin.invite?t=' . time();
-        $postdata['channels'] = $this->_config['channels'];
+        if(!empty($config['channels']))
+            $postdata['channels'] = $this->_config['channels'];
         $postdata['set_active'] = 1;
         $postdata['token'] = $this->_config['token'];
         $postdata['email'] = $data['email'];
@@ -152,18 +170,17 @@ class SlackInviter {
         $postdata = http_build_query($postdata);
 
         $curl = curl_init();
-        $options = array(
+        $options = [
             CURLOPT_RETURNTRANSFER => true,   // return web page
             CURLOPT_URL => $url,
             CURLOPT_POST => TRUE,
             CURLOPT_SSL_VERIFYPEER => FALSE,
             CURLOPT_POSTFIELDS => $postdata
-        );
+        ];
         curl_setopt_array($curl, $options);
 
         $response = curl_exec($curl);
 
         return $response;
-
     }
 }
