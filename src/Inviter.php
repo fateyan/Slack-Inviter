@@ -81,9 +81,9 @@ class Inviter {
 
         if(isset($response['error'])) {
             if($response['error'] === 'invalid_email')
-                $errors[] = "Your email is invalid.";
+                $errors[] = "Invalid email.";
             if($response['error'] === 'already_invited')
-                $errors[] = "You has already been invited.";
+                $errors[] = "We have already invited you.";
         }
         include BASE_PATH . 'views/error.php';
         return;
@@ -129,13 +129,13 @@ class Inviter {
             die('missing configuration');
         }
         $errors = [];
-        $errors[] = empty($cfg['token']) ? "This application missing config['token']." : '';
-        $errors[] = empty($cfg['domain']) ? "This application missing config['domain']." : '';
-        $errors[] = empty($cfg['title']) ? "This application missing config['title']." : '';
-        $errors[] = empty($cfg['message']['header']) ? "This application missing config['header']." : '';
-        $errors[] = empty($cfg['message']['subheader']) ? "This application missing config['subheader']." : '';
-        $errors[] = empty($cfg['message']['succeed']) ? "This application missing config['succeed']." : '';
-        $errors[] = empty($cfg['message']['fail']) ? "This application missing config['fail']." : '';
+        $errors[] = empty($cfg['token']) ? "Missing SLACK_TOKEN" : '';
+        $errors[] = empty($cfg['domain']) ? "Missing SLACK_DOMAIN" : '';
+        $errors[] = empty($cfg['title']) ? "Missing SLACK_TITLE" : '';
+        $errors[] = empty($cfg['message']['header']) ? "Missing SLACK_HEADER" : '';
+        $errors[] = empty($cfg['message']['subheader']) ? "Missing SLACK_SUB_HEADER" : '';
+        $errors[] = empty($cfg['message']['succeed']) ? "Missing SLACK_SUCCEED" : '';
+        $errors[] = empty($cfg['message']['fail']) ? "Missing SLACK_FAILED" : '';
         $errors = array_filter($errors);
         if(!empty($errors)) {
             $message['fail'] = 'Missing configuration.';

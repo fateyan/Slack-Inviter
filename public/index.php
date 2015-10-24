@@ -19,8 +19,8 @@ $config['channels']             = (empty($_SERVER['SLACK_CHANNELS'])) ? null : t
 //Messages on page
 $config['message']['header']    = $_SERVER['SLACK_HEADER'];
 $config['message']['subheader'] = $_SERVER['SLACK_SUB_HEADER'];
-$config['message']['succeed']   = (empty($_SERVER['SLACK_INVITE_SUCCEED'])) ? 'Invitation is sended to your email, check it plz.' : $_SERVER['SLACK_INVITE_SUCCEED'];
-$config['message']['fail']      = (empty($_SERVER['SLACK_INVITE_FAIL'])) ? 'Oops! It has some problems.' : $_SERVER['SLACK_INVITE_FAIL'];
+$config['message']['succeed']   = (empty($_SERVER['SLACK_INVITE_SUCCEED'])) ? 'An invitation has been sent to your email, please check it.' : $_SERVER['SLACK_INVITE_SUCCEED'];
+$config['message']['fail']      = (empty($_SERVER['SLACK_INVITE_FAIL'])) ? 'Oops! An error occured.' : $_SERVER['SLACK_INVITE_FAIL'];
 //html title
 $config['title']                = $_SERVER['SLACK_TITLE'];
 
