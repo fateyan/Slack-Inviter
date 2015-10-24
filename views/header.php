@@ -3,70 +3,62 @@
 <head>
     <meta charset="utf-8">
     <title><?php echo $data['title'];?></title>
-
+    <link rel="stylesheet" type="text/css" href="assets/normalize.css">
     <style>
     html, body {
         height: 100vh;
-        text-align: center;
-        padding: 0px;
-        margin: 0px;
-        font-family: 'Oxygen', sans-serif;
     }
     body {
-        background-repeat: no-repeat;
-        background-size: cover;
+        font-family: 'Oxygen', sans-serif;
+        min-width: 410px;
+        padding-top: 70px;
+        font-size: 14px;
     }
     .joinus {
-        margin-top: 10%;
-        background-color: #fff;
-        box-shadow: 0px 0px 10px #333;
-        padding: 30px 24px;
-        padding-top: 0px;
-        width: 18rem;
-        min-width: 100px;
-        height: 18rem;
-        display: inline-block;
+        background-color: rgba(255, 255, 255, .8);
+        width: 40%;
+        min-width: 410px;
+        margin: 0 auto;
+        padding: 20px 0;
+        border-radius: 7px;
+        box-shadow: 0 0 7px rgba(0, 0, 0, .1);
+    }
+    .joinus h1, .joinus h4 {
+        margin: .2em 5%;
+    }
+    .form-col {
+        width: 90%;
+        margin: 5%;
     }
     .form-input {
         border-radius: 4px 4px;
         height: 30px;
         border: solid #ddd 1px;
-        width: 180px;
+        width: 100%;
+        font-size: 1.1em;
+        line-height: 1.42;
+        padding: 8px 13px;
     }
-    .title {
-        color: #111;
-        margin: 8px 0px 0px 0px;
-    }
-    .sub-title {
-        margin: 5px;
-        font-weight: normal;
-        color: #222;
-    }
-    .submit {
-        background-color: #D03D3D;
-        color: #fff;
+    .form-btn {
+        background: #1E91CF;
+        border-color: #1978AB;
+        background-image: 0;
         border: none;
-        border-radius: 3px 3px 3px 3px;
-        height: 30px;
-        padding: 5px 10px;
+        color: #FFF;
+        border-radius: 3px;
+        display: inline-block;
+        font-size: 1.2em; 
+        font-weight: normal;
+        line-height: 1.42;
+        padding: 8px 12px;
+        text-align: center;
+        vertical-align: middle;
     }
-    td:nth-child(even) {
-        text-align: left;
-    } 
-    td:nth-child(odd) {
-        text-align: right;
-    }
-    .submit-td {
-        text-align: center !important;
-    } 
     canvas { 
         top: 0;
         left: 0;
-        position: absolute;
+        position: fixed;
         z-index: -999;
-    }
-    .alert {
-        color: red;
     }
     </style>
     <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">

@@ -2,12 +2,17 @@
     "name": "fateyan/slack-inviter",
     "description": "Slack Inviter By PHP",
     "require": {
-        "gregwar/captcha": "dev-master"
+        "gregwar/captcha": "dev-master",
+        "vlucas/phpdotenv": "^2.0"
     },
     "authors": [
         {
             "name": "fateyan",
             "email": "fateyan.tw@gmail.com"
+        },
+        {
+            "name": "BinotaLiu",
+            "email": "binota@binota.org"
         }
     ],
 	"autoload": {

@@ -2,30 +2,35 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>Succeed</title>
+    <link rel="stylesheet" type="text/css" href="assets/normalize.css">
     <style>
     body {
-        font-family: "Consolas";
-        font-size: 200%;
+        font-family: Arial;
+        font-size: 14px;
+        background: #F0EEE9;
+        margin-top: 100px;
     }
     .container {
+        width: 40%;
+        background: #FFF;
         margin: 0 auto;
-        text-align: center;
+        padding: 10px;
+        border-radius: 6px;
     }
     .container h1 {
-        color: #A1DC56;
+        padding-left: 10px;
+        margin: .2em 0;
+        font-size: 4em;
+        color: #F97C6E;
     }
     .container h4 {
+        padding-left: 10px;
+        margin: .2em 0;
+        font-size: 2em;
         color: #C7C7C6;
     }
-    .error-list {
-        margin: 0;
-        padding: 0;
-    }
-    .error-list li {
-        list-style: none;
-    }
     </style>
-    <title>Errors occurred</title>
 </head>
 <body>
     <div class="container">
