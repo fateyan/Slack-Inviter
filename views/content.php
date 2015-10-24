@@ -13,10 +13,8 @@
                 <input type="text" name="lastname" class="form-input" placeholder="Lastname (Optional)">
             </div>
             <div class="form-col">
-                <input type="text" name="captcha" class="form-input" placeholder="Captchat" required>
-            </div>
-            <div class="form-col">
-                <img src="<?php echo $data['captcha'];?>">
+                <div class="g-recaptcha" data-sitekey="<?php echo $data['captcha']; ?>"></div>
+                <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
             </div>
             <div class="form-col">
                 <button type="submit" class="form-btn">Submit</button>

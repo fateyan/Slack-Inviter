@@ -23,6 +23,9 @@ $config['message']['succeed']   = (empty($_SERVER['SLACK_INVITE_SUCCEED'])) ? 'A
 $config['message']['fail']      = (empty($_SERVER['SLACK_INVITE_FAIL'])) ? 'Oops! An error occured.' : $_SERVER['SLACK_INVITE_FAIL'];
 //html title
 $config['title']                = $_SERVER['SLACK_TITLE'];
+//Google reCAPTCHA
+$config['recaptcha']['sitekey'] = $_SERVER['RECAPTCHA_SITEKEY'];
+$config['recaptcha']['secret'] = $_SERVER['RECAPTCHA_SECRET'];
 
 define('BASE_PATH', realpath('../') . '/');
 

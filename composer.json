@@ -2,8 +2,8 @@
     "name": "fateyan/slack-inviter",
     "description": "Slack Inviter By PHP",
     "require": {
-        "gregwar/captcha": "dev-master",
-        "vlucas/phpdotenv": "^2.0"
+        "vlucas/phpdotenv": "^2.0",
+        "google/recaptcha": "^1.1"
     },
     "authors": [
         {

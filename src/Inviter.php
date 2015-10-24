@@ -9,7 +9,7 @@ namespace Slack;
 class Inviter {
 
     /**
-     * Composer dependency, \Gregwar\Captcha\CaptchaBuilder
+     * Composer dependency, Google reCAPTCHA, \ReCaptcha\ReCaptcha
      * @var object
      */
     private $_captcha;
@@ -23,7 +23,7 @@ class Inviter {
     public function __construct($config) {
         $this->_checkConfig($config);
         $this->_config = $config;
-        $this->_captcha = new \Gregwar\Captcha\CaptchaBuilder();
+        $this->_captcha = new \ReCaptcha\ReCaptcha($this->_config['recaptcha']['secret']);
     }
 
     /**
@@ -31,8 +31,7 @@ class Inviter {
      * @var
      */
     public function index() {
-        $this->_setCaptcha();
-        $data['captcha']   = $this->_getCaptcha();
+        $data['captcha']   = $this->_config['recaptcha']['sitekey'];
         $data['title']     = $this->_config['title'];
         $data['header']    = $this->_config['message']['header'];
         $data['subheader'] = $this->_config['message']['subheader'];
@@ -53,12 +52,11 @@ class Inviter {
         $errors = [];
         $message = $this->_config['message'];
 
-        if( isset($_POST['captcha']) )
-            if( !$this->_checkCaptcha($_POST['captcha']) ) {
-                $errors[] = 'Your captcha is wrong.';
-                include BASE_PATH . 'views/error.php';
-                return;
-            }
+        if( !$this->_checkCaptcha($_POST) ) {
+            $errors[] = 'Your captcha is wrong.';
+            include BASE_PATH . 'views/error.php';
+            return;
+        }
         if( empty($_POST['email']) ) {
             $errors[] = 'Your email is empty.';
             include BASE_PATH . 'views/error.php';
@@ -90,35 +88,13 @@ class Inviter {
     }
 
     /**
-     * set captcha
-     */
-    private function _setCaptcha() {
-        $this->_captcha->build();
-        $_SESSION['phrase'] = $this->_captcha->getPhrase();
-        return;
-    }
-
-    /**
      * Checking whether post-captcha is right
      * @param string captcha
      * @return bool
      */
     private function _checkCaptcha($post) {
-        $phrase = $_SESSION['phrase'];
-        $this->_captcha->build();
-        if( empty( $phrase ) )
-            return FALSE;
-        if( $post === $phrase ) {
-            return TRUE;
-        }
-        return FALSE;
-    }
-
-    /**
-     * @return string image of captcha
-     */
-    private function _getCaptcha() {
-        return $this->_captcha->inline();
+        $resp = $this->_captcha->verify($post['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        return $resp->isSuccess() ? TRUE : FALSE;
     }
 
     /**
@@ -136,6 +112,8 @@ class Inviter {
         $errors[] = empty($cfg['message']['subheader']) ? "Missing SLACK_SUB_HEADER" : '';
         $errors[] = empty($cfg['message']['succeed']) ? "Missing SLACK_SUCCEED" : '';
         $errors[] = empty($cfg['message']['fail']) ? "Missing SLACK_FAILED" : '';
+        $errors[] = empty($cfg['recaptcha']['sitekey']) ? "Missing RECAPTCHA_SITEKEY" : '';
+        $errors[] = empty($cfg['recaptcha']['secret']) ? "Missing RECAPTCHA_SECRET" : '';
         $errors = array_filter($errors);
         if(!empty($errors)) {
             $message['fail'] = 'Missing configuration.';
