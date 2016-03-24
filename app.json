@@ -8,6 +8,7 @@
       "required": true
     },
     "SLACK_DOMAIN": {
+      "description": "your team name of slack, {team_name}.slack.com",
       "required": true
     },
     "SLACK_CHANNELS": {
@@ -23,6 +24,12 @@
     "SLACK_TITLE": {
       "description": "title of html",
       "value": "Join our slack"
+    },
+    "RECAPTCHA_SITEKEY": {
+      "description": "Site key for reCaptcha, you can get it from https://www.google.com/recaptcha/admin"
+    },
+    "RECAPTCHA_SECRET": {
+      "description": "Secret key for reCaptcha, you can get it from https://www.google.com/recaptcha/admin"
     }
   }
 }
