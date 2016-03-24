@@ -1,13 +1,18 @@
 # Slack-Inviter
-A Slack Inviter Written By PHP
+A slack self-invite service written in PHP with random and fancy background
+
+# Screenshots
+![screenshot 1](https://raw.github.com/fateyan/Slack-Inviter/master/screenshot1.jpg)
+
+![screenshot 2](https://raw.github.com/fateyan/Slack-Inviter/master/screenshot2.jpg)
 
 # Building
 ## Deploy on Heroku
 [![Deploy Button](https://www.herokucdn.com/deploy/button.png)](https://www.heroku.com/deploy/?template=https://github.com/fateyan/slack-inviter)
-## Or You Can Set Up It by Yourself
-1. Just Clone this Repo: `git clone ssh://git@github.com/fateyan/slack-inviter.git`  
+## Or you can set up it by yourself
+1. Just clone this repo: `git clone ssh://git@github.com/fateyan/slack-inviter.git`  
 2. Then run `composer install`
-3. Set Up Environment Variables  
+3. Set up environment variables  
 For Nginx:
 ```nginx
 fastcgi_param SLACK_TOKEN yourtoken;  
