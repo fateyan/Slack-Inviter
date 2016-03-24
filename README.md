@@ -31,7 +31,8 @@ For Apache:
 SetEnv VariableName VariableValue
 ```
 
-Environment Variables:
+Environment Variables:  
+
 | Key               | Description                                                                            |
 |-------------------|----------------------------------------------------------------------------------------|
 | SLACK_TOKEN       | slack token, it can be found on https://api.slack.com/web                              |
