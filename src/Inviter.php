@@ -24,6 +24,9 @@ class Inviter {
         $this->_checkConfig($config);
         $this->_config = $config;
         $this->_captcha = new \ReCaptcha\ReCaptcha($this->_config['recaptcha']['secret']);
+
+        // domain compatibility fixing
+        $this->_config = _fixDomain($config['domain']);
     }
 
     /**
@@ -95,6 +98,22 @@ class Inviter {
     private function _checkCaptcha($post) {
         $resp = $this->_captcha->verify($post['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         return $resp->isSuccess() ? TRUE : FALSE;
+    }
+
+    /**
+     * fixing domain
+     *
+     * for domain compatibility
+     * Example:
+     * fixDomain('XXXX.slack.com') // XXXX
+     * fixDomain('XXXX')           // XXXX
+     * fixDomain('XXXX.')          // XXXX
+     * 
+     * @param $domain
+     * @return $fixedDomain
+     */
+    private function _fixDomain($domain) {
+        return trim(preg_replace('/\.slack\.com/', '', $domain), '. ');
     }
 
     /**
