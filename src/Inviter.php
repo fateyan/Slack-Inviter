@@ -26,7 +26,8 @@ class Inviter {
         $this->_captcha = new \ReCaptcha\ReCaptcha($this->_config['recaptcha']['secret']);
 
         // domain compatibility fixing
-        $this->_config = _fixDomain($config['domain']);
+        $this->_config['domain'] = $this->_fixDomain($config['domain']);
+
     }
 
     /**
