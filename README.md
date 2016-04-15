@@ -36,7 +36,7 @@ Environment Variables:
 | Key               | Description                                                                            |
 |-------------------|----------------------------------------------------------------------------------------|
 | SLACK_TOKEN       | slack token, it can be found on https://api.slack.com/web                              |
-| SLACK_DOMAIN      |                                                                                        |
+| SLACK_DOMAIN      | your team name of slack, {team_name}.slack.com                                         |
 | SLACK_CHANNELS    | divide by comma[,], it can be found on https://api.slack.com/methods/channel.list/test |
 | SLACK_HEADER      | title of invite form                                                                   |
 | SLACK_SUB_HEADER  | sub title of invite form                                                               |
