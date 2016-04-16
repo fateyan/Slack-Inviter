@@ -33,16 +33,16 @@ SetEnv VariableName VariableValue
 
 Environment Variables:  
 
-| Key               | Description                                                                            |
-|-------------------|----------------------------------------------------------------------------------------|
-| SLACK_TOKEN       | slack token, it can be found on https://api.slack.com/web                              |
-| SLACK_DOMAIN      | your team name of slack, {team_name}.slack.com                                         |
-| SLACK_CHANNELS    | divide by comma[,], it can be found on https://api.slack.com/methods/channel.list/test |
-| SLACK_HEADER      | title of invite form                                                                   |
-| SLACK_SUB_HEADER  | sub title of invite form                                                               |
-| SLACK_TITLE       | title of html                                                                          |
-| RECAPTCHA_SITEKEY | Site key for reCaptcha, you can get it from https://www.google.com/recaptcha/admin     |
-| RECAPTCHA_SECRET  | Secret key for reCaptcha, you can get it from https://www.google.com/recaptcha/admin   |
+| Key               | Description                                                                              |
+|-------------------|------------------------------------------------------------------------------------------|
+| SLACK_TOKEN       | Slack token, it can be found on https://api.slack.com/web                                |
+| SLACK_DOMAIN      | Your team name of Slack, {team_name}.slack.com                                           |
+| SLACK_CHANNELS    | Separate by comma[,], it can be found on https://api.slack.com/methods/channel.list/test |
+| SLACK_HEADER      | Title for invite form                                                                    |
+| SLACK_SUB_HEADER  | Sub title for invite form                                                                |
+| SLACK_TITLE       | Page title                                                                               |
+| RECAPTCHA_SITEKEY | Site key for reCaptcha, you can get it from https://www.google.com/recaptcha/admin       |
+| RECAPTCHA_SECRET  | Secret key for reCaptcha, you can get it from https://www.google.com/recaptcha/admin     |
 
 4. There You Go~
   

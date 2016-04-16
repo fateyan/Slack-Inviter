@@ -4,25 +4,27 @@
   "repository": "https://github.com/fateyan/slack-inviter",
   "env": {
     "SLACK_TOKEN": {
-      "description": "slack token, it can be found on https://api.slack.com/web",
+      "description": "Slack token, it can be found on https://api.slack.com/web",
       "required": true
     },
     "SLACK_DOMAIN": {
-      "description": "your team name of slack, {team_name}.slack.com",
+      "description": "Your team name of Slack, {team_name}.slack.com",
       "required": true
     },
     "SLACK_CHANNELS": {
-      "description": "divide by comma[,], it can be found on https://api.slack.com/methods/channel.list/test",
+      "description": "Separate by comma[,], it can be found on https://api.slack.com/methods/channel.list/test",
       "required": true
     },
     "SLACK_HEADER": {
-      "value": "Hi ! Join our Slack"
+      "value": "Hi ! Join our Slack",
+      "description": "Title for invite form"
     },
     "SLACK_SUB_HEADER": {
-      "value": "welcome"
+      "value": "welcome",
+      "description": "Sub title for invite form"
     },
     "SLACK_TITLE": {
-      "description": "title of html",
+      "description": "Page title",
       "value": "Join our slack"
     },
     "RECAPTCHA_SITEKEY": {
