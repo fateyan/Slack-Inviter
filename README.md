@@ -2,9 +2,9 @@
 A slack self-invite service written in PHP with random and fancy background
 
 # Screenshots
-![screenshot 1](https://raw.github.com/fateyan/Slack-Inviter/master/screenshot1.jpg)
+![screenshot 1](https://raw.github.com/fateyan/Slack-Inviter/master/.github/screenshot1.jpg)
 
-![screenshot 2](https://raw.github.com/fateyan/Slack-Inviter/master/screenshot2.jpg)
+![screenshot 2](https://raw.github.com/fateyan/Slack-Inviter/master/.github/screenshot2.jpg)
 
 # Building
 ## Deploy on Heroku
