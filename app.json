@@ -12,7 +12,7 @@
       "required": true
     },
     "SLACK_CHANNELS": {
-      "description": "Separate by comma[,], it can be found on https://api.slack.com/methods/channel.list/test",
+      "description": "Separate by comma[,], it can be found on https://api.slack.com/methods/channels.list/test",
       "required": true
     },
     "SLACK_HEADER": {
