@@ -39,6 +39,7 @@ class Inviter {
         $data['title']     = $this->_config['title'];
         $data['header']    = $this->_config['message']['header'];
         $data['subheader'] = $this->_config['message']['subheader'];
+        $data['domain']    = $this->_config['domain'];
         $data['postTo']    = 'send';
 
         include BASE_PATH . 'views/header.php';

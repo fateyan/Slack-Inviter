@@ -4,6 +4,9 @@ error_reporting(0);
 ini_set('display_errors', 'Off');
 require '../vendor/autoload.php';
 
+//Cheking if dotenv not found
+if (!file_exists(__DIR__ . '/../.env')) die('.env file not found. Please configure it first.');
+
 // Loading dotenv
 $dotenv = new Dotenv\Dotenv(realpath(__DIR__ . '/..'));
 $dotenv->overload();

@@ -14,6 +14,14 @@
         padding-top: 70px;
         font-size: 14px;
     }
+    a {
+        color: #1e91cf;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #1e91cf;
+        text-decoration: underline;
+    }
     .joinus {
         background-color: rgba(255, 255, 255, .8);
         width: 40%;
