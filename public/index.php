@@ -4,12 +4,14 @@ error_reporting(0);
 ini_set('display_errors', 'Off');
 require '../vendor/autoload.php';
 
-//Cheking if dotenv not found
-if (!file_exists(__DIR__ . '/../.env')) die('.env file not found. Please configure it first.');
+define('BASE_PATH', realpath('../') . '/');
 
-// Loading dotenv
-$dotenv = new Dotenv\Dotenv(realpath(__DIR__ . '/..'));
-$dotenv->overload();
+//Cheking if dotenv not found
+if (file_exists(BASE_PATH . '/.env')) {
+    $dotenv = new Dotenv\Dotenv(realpath(__DIR__ . '/..'));
+    // Overload existing environment variables
+    $dotenv->overload();
+}
 
 /**
  * Config
@@ -29,8 +31,6 @@ $config['title']                = $_SERVER['SLACK_TITLE'];
 //Google reCAPTCHA
 $config['recaptcha']['sitekey'] = $_SERVER['RECAPTCHA_SITEKEY'];
 $config['recaptcha']['secret'] = $_SERVER['RECAPTCHA_SECRET'];
-
-define('BASE_PATH', realpath('../') . '/');
 
 $route = empty($_GET['route']) ? 'index' : $_GET['route'];
 $inviter = new \Slack\Inviter($config);
